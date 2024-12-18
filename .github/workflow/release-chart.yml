@@ -1,34 +1,56 @@
-name: Release Helm Chart
+name: Release Charts
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'charts/**' 
 
 jobs:
   release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+        uses: azure/setup-helm@v3
 
-      - name: Package Helm Chart
-        run: |
-          helm package charts/my-chart --destination ./packaged
-
-      - name: Update Helm Repository Index
-        run: |
-          helm repo index ./packaged --url https://<username>.github.io/<repository>/
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packaged
+          charts_dir: charts
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        
+      - name: List all charts
+        run: |
+          echo "Listing all charts in the charts directory"
+          ls -R ./charts
+          
+      - name: Package all charts
+        run: |
+          for chart in ./charts/*/Chart.yaml; do
+            chart_dir=$(dirname "$chart")
+            echo "Packaging chart in directory: $chart_dir"
+            helm package "$chart_dir" --destination ./charts/packages
+          done
+          
+      - name: Update index.yaml
+        run: |
+          echo "Updating index.yaml"
+          helm repo index ./charts/packages --url https://its-me-mayday.github.io/AccioChart/
+          
+      - name: Commit and push updates
+        run: |
+          git add .
+          git commit -m "Update Helm charts"
+          git push origin main
