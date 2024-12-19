@@ -1,18 +1,66 @@
-name: Release Charts
+name: release
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'charts/**'
+      - 'docker/**'
 
 jobs:
-  release:
+  docker:
+    runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Chart version
+        run: |
+          echo "CHART_VERSION=$(grep 'version:' charts/tom-riddle-diary/Chart.yaml|cut -f2 -d ':'|tr -d ' ')" >> "$GITHUB_ENV"
+          echo "CHART_VERSION=$(grep 'version:' charts/tom-riddle-diary/Chart.yaml|cut -f2 -d ':'|tr -d ' ')"
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v5
+        with:
+          context: ./docker
+          file: ./docker/Dockerfile
+          platforms: linux/amd64
+          push: true
+          provenance: false
+          tags: |
+            ghcr.io/its-me-mayday/tom-riddle-diary:stable
+            ghcr.io/its-me-mayday/tom-riddle-diary:latest
+            ghcr.io/its-me-mayday/tom-riddle-diary:${{ env.CHART_VERSION }}
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+  
+  chart:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -22,35 +70,9 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        uses: azure/setup-helm@v3
+        uses: azure/setup-helm@v4
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        with:
-          charts_dir: charts
+        uses: helm/chart-releaser-action@v1.5.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        
-      - name: List all charts
-        run: |
-          echo "Listing all charts in the charts directory"
-          ls -R ./charts
-          
-      - name: Package all charts
-        run: |
-          for chart in ./charts/*/Chart.yaml; do
-            chart_dir=$(dirname "$chart")
-            echo "Packaging chart in directory: $chart_dir"
-            helm package "$chart_dir" --destination ./charts/packages
-          done
-          
-      - name: Update index.yaml
-        run: |
-          echo "Updating index.yaml"
-          helm repo index ./charts/packages --url https://its-me-mayday.github.io/AccioChart/
-          
-      - name: Commit and push updates
-        run: |
-          git add .
-          git commit -m "Update Helm charts"
-          git push origin main
