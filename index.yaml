@@ -55,6 +55,16 @@ entries:
   tom-riddle-diary:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-12-19T15:26:32.629065524Z"
+    description: A Helm chart for Kubernetes
+    digest: 736d321f15b3172726e7010dd33acd54402af92d893f7607c621be1c11a18b07
+    name: tom-riddle-diary
+    type: application
+    urls:
+    - https://github.com/its-me-mayday/AccioChart/releases/download/tom-riddle-diary-0.3.0/tom-riddle-diary-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-12-19T15:18:24.142933688Z"
     description: A Helm chart for Kubernetes
     digest: 16e2fd4e3359066b8bcda72e9d9aa8995b9f8c4adb3b2733fc95f1c6961417d7
@@ -73,4 +83,4 @@ entries:
     urls:
     - https://its-me-mayday.github.io/AccioChart/tom-riddle-diary-0.2.1.tgz
     version: 0.2.1
-generated: "2024-12-19T15:18:24.142952733Z"
+generated: "2024-12-19T15:26:32.629084059Z"
