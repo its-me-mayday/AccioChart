@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+entries:
+  tom-riddle-diary:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-12-19T14:56:29.93135285+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 57ba8d2ab0dd560b021ed8b66736dde014e386813f0a4eab128716a9e339a04d
+    name: tom-riddle-diary
+    type: application
+    urls:
+    - packaged/tom-riddle-diary-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-12-19T14:56:29.930511087+01:00"
