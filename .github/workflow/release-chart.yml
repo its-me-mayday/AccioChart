@@ -66,24 +66,8 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v4
 
-      - name: Package charts and update index.yaml
-        run: |
-          # Package each chart
-          for chart in charts/*; do
-            if [ -d "$chart" ]; then
-              echo "Packaging chart $chart"
-              helm package "$chart"
-            fi
-          done
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.5.0
 
-          # Update the index.yaml with the new charts
-          helm repo index ./ --url https://its-me-mayday.github.io/AccioChart/
-
-      - name: Commit and push changes
-        run: |
-          git add index.yaml
-          git add *.tgz
-          git commit -m "Update chart packages and index.yaml"
-          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
