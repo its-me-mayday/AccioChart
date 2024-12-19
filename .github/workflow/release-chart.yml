@@ -32,7 +32,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Iterate over charts
+      - name: Iterate over charts and build images
         run: |
           for chart in charts/*; do
             if [ -d "$chart" ]; then
@@ -40,27 +40,15 @@ jobs:
               CHART_VERSION=$(grep 'version:' "$chart/Chart.yaml" | cut -f2 -d ':' | tr -d ' ')
               echo "Building and pushing Docker image for $CHART_NAME:$CHART_VERSION"
 
-              # Set environment variables for each chart
-              echo "CHART_NAME=$CHART_NAME" >> "$GITHUB_ENV"
-              echo "CHART_VERSION=$CHART_VERSION" >> "$GITHUB_ENV"
+              # Build and push the Docker image
+              docker buildx build \
+                --platform linux/amd64 \
+                -t ghcr.io/its-me-mayday/$CHART_NAME:stable \
+                -t ghcr.io/its-me-mayday/$CHART_NAME:latest \
+                -t ghcr.io/its-me-mayday/$CHART_NAME:$CHART_VERSION \
+                ./docker --file ./docker/Dockerfile --push
             fi
           done
-
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: ./docker
-          file: ./docker/Dockerfile
-          platforms: linux/amd64
-          push: true
-          provenance: false
-          tags: |
-            ghcr.io/its-me-mayday/${{ env.CHART_NAME }}:stable
-            ghcr.io/its-me-mayday/${{ env.CHART_NAME }}:latest
-            ghcr.io/its-me-mayday/${{ env.CHART_NAME }}:${{ env.CHART_VERSION }}
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
 
   chart:
     runs-on: ubuntu-latest
