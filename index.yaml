@@ -1,6 +1,27 @@
 apiVersion: v1
 entries:
+  helga-hufflepuffs-cup:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-12-19T15:09:26.735465186Z"
+    description: A Helm chart for Kubernetes
+    digest: 7321efe85805180b26b76493dc308db1c59d51259aba9f56a1f34a70bd96f5ed
+    name: helga-hufflepuffs-cup
+    type: application
+    urls:
+    - https://github.com/its-me-mayday/AccioChart/releases/download/helga-hufflepuffs-cup-0.1.0/helga-hufflepuffs-cup-0.1.0.tgz
+    version: 0.1.0
   marvolo-gaunts-ring:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-12-19T15:09:26.904921208Z"
+    description: A Helm chart for Kubernetes
+    digest: 44b790fe2d5781a12527dcc3f1c9e459589372fca8a08ff9f7bfb0e8690f2c9a
+    name: marvolo-gaunts-ring
+    type: application
+    urls:
+    - https://github.com/its-me-mayday/AccioChart/releases/download/marvolo-gaunts-ring-0.4.1/marvolo-gaunts-ring-0.4.1.tgz
+    version: 0.4.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-12-19T15:42:33.730758295+01:00"
@@ -22,4 +43,4 @@ entries:
     urls:
     - https://its-me-mayday.github.io/AccioChart/tom-riddle-diary-0.2.1.tgz
     version: 0.2.1
-generated: "2024-12-19T15:42:33.73038839+01:00"
+generated: "2024-12-19T15:09:26.904929613Z"
