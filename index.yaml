@@ -3,6 +3,16 @@ entries:
   helga-hufflepuffs-cup:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-12-19T15:18:23.698288325Z"
+    description: A Helm chart for Kubernetes
+    digest: 5d7b67e14a389e4d2ca5d38d8fc3f3f7ffdbb21ddd28b0d879dbe7f0c1e822ad
+    name: helga-hufflepuffs-cup
+    type: application
+    urls:
+    - https://github.com/its-me-mayday/AccioChart/releases/download/helga-hufflepuffs-cup-0.1.1/helga-hufflepuffs-cup-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-12-19T15:09:26.735465186Z"
     description: A Helm chart for Kubernetes
     digest: 7321efe85805180b26b76493dc308db1c59d51259aba9f56a1f34a70bd96f5ed
@@ -12,6 +22,16 @@ entries:
     - https://github.com/its-me-mayday/AccioChart/releases/download/helga-hufflepuffs-cup-0.1.0/helga-hufflepuffs-cup-0.1.0.tgz
     version: 0.1.0
   marvolo-gaunts-ring:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-12-19T15:18:23.918671568Z"
+    description: A Helm chart for Kubernetes
+    digest: 120610c8c0d97bd7122c1dc881448644685387a50e46a0b85f5e9c6786343f55
+    name: marvolo-gaunts-ring
+    type: application
+    urls:
+    - https://github.com/its-me-mayday/AccioChart/releases/download/marvolo-gaunts-ring-0.5.0/marvolo-gaunts-ring-0.5.0.tgz
+    version: 0.5.0
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-12-19T15:09:26.904921208Z"
@@ -35,6 +55,16 @@ entries:
   tom-riddle-diary:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-12-19T15:18:24.142933688Z"
+    description: A Helm chart for Kubernetes
+    digest: 16e2fd4e3359066b8bcda72e9d9aa8995b9f8c4adb3b2733fc95f1c6961417d7
+    name: tom-riddle-diary
+    type: application
+    urls:
+    - https://github.com/its-me-mayday/AccioChart/releases/download/tom-riddle-diary-0.2.2/tom-riddle-diary-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2024-12-19T15:42:33.731025111+01:00"
     description: A Helm chart for Kubernetes
     digest: 85fe34c7bc36d4914568fe19b71019274c1de1ca0eb49d85eed7c3c7a440a9e1
@@ -43,4 +73,4 @@ entries:
     urls:
     - https://its-me-mayday.github.io/AccioChart/tom-riddle-diary-0.2.1.tgz
     version: 0.2.1
-generated: "2024-12-19T15:09:26.904929613Z"
+generated: "2024-12-19T15:18:24.142952733Z"
