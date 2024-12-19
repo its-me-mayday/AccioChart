@@ -3,23 +3,23 @@ entries:
   marvolo-gaunts-ring:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-12-19T15:03:44.428694211+01:00"
+    created: "2024-12-19T15:15:44.679793367+01:00"
     description: A Helm chart for Kubernetes
-    digest: 5ded9a5ce6345eb59910f3a4b772e34d90b2f030c4eb7f846acc36f3071f6c7f
+    digest: fc2e065e4c15f320333c71287d18ef2163b4f1f9380d1d370a6dcf58d7bcf1cd
     name: marvolo-gaunts-ring
     type: application
     urls:
-    - packaged/marvolo-gaunts-ring-0.1.0.tgz
-    version: 0.1.0
+    - packaged/marvolo-gaunts-ring-0.3.0.tgz
+    version: 0.3.0
   tom-riddle-diary:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-12-19T15:03:44.429135224+01:00"
+    created: "2024-12-19T15:15:44.680213416+01:00"
     description: A Helm chart for Kubernetes
-    digest: 9004ca108bca903beb11fbc6f6118d978210b7ed4df11199345ccc9f640ffc5e
+    digest: 4da78960124ade2cc5dcea7d49a14cc14fff1064a975a878d541f6551f9db0fe
     name: tom-riddle-diary
     type: application
     urls:
-    - packaged/tom-riddle-diary-0.1.0.tgz
-    version: 0.1.0
-generated: "2024-12-19T15:03:44.427904769+01:00"
+    - packaged/tom-riddle-diary-0.2.0.tgz
+    version: 0.2.0
+generated: "2024-12-19T15:15:44.679435842+01:00"
